@@ -98,6 +98,62 @@ void ui_run()
 				benchmark(bubble_sort_t, best_t, result, RESULT_ROWS);
 				printf("todo> implemenet BE + present results in FE\n");
 				break;
+			case 'd':
+				benchmark(bubble_sort_t, worst_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'e':
+				benchmark(bubble_sort_t, average_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'f':
+				benchmark(insertion_sort_t, best_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'g':
+				benchmark(insertion_sort_t, worst_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'h':
+				benchmark(insertion_sort_t, average_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'i':
+				benchmark(quick_sort_t, best_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'j':
+				benchmark(quick_sort_t, worst_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'k':
+				benchmark(quick_sort_t, average_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'l':
+				benchmark(linear_search_t, best_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'm':
+				benchmark(linear_search_t, worst_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'n':
+				benchmark(linear_search_t, average_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'o':
+				benchmark(binary_search_t, best_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'p':
+				benchmark(binary_search_t, worst_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
+			case 'q':
+				benchmark(binary_search_t, average_t, result, RESULT_ROWS);
+				printf("todo> implemenet BE + present results in FE\n");
+				break;
 			// Invalid input
 			default:
 				show_menu = false;
