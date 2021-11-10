@@ -28,7 +28,8 @@ typedef enum {
 // result_t defines a timed measurement for a given array size
 typedef struct {
 	int size;
-	double time;
+	double time,nlog,logn,nlogn,n,n2,n3;
+
 } result_t;
 
 // benchmark benchmarks an algorithm a for a specific case c, writing n results
