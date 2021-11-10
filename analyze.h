@@ -22,7 +22,7 @@ typedef enum {
 typedef enum {
 	best_t,
 	worst_t,
-	average_t,
+	average_t
 } case_t;
 
 // result_t defines a timed measurement for a given array size

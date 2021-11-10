@@ -8,6 +8,7 @@
 //
 // Private
 //
+
 static void ui_invalid_input()
 {
 	printf("info> bad input\n");
@@ -70,6 +71,32 @@ static void ui_menu()
 	ui_line('-', MENU_WIDTH);
 }
 
+static const char * const algorithm_str[] = {
+	[bubble_sort_t] = "Bubble Sort",
+	[insertion_sort_t] = "Insertion Sort",
+	[quick_sort_t] = "Quick Sort",
+	[linear_search_t] = "Linear Search",
+	[binary_search_t] = "Binary Search"
+};
+
+static const char * const best_str[] = {
+	[best_t] = "Best",
+	[worst_t] = "Worst",
+	[average_t] = "Average"
+};
+
+static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
+{
+	ui_line('*', MENU_WIDTH);
+	printf("\t%s: %s\n", algorithm_str[a], best_str[c]);
+	ui_line('~', MENU_WIDTH);
+	printf("Size\tT (s)\n");
+	ui_line('~', MENU_WIDTH);
+	for(int i = 0; i < RESULT_ROWS; i++) {
+		printf("%d\t%f\n",buf[i].size, buf[i].time);
+	}
+}
+
 //
 // Public
 //
@@ -96,7 +123,7 @@ void ui_run()
 			// Bubble sort
 			case 'c':
 				benchmark(bubble_sort_t, best_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(bubble_sort_t, best_t, result);
 				break;
 			case 'd':
 				benchmark(bubble_sort_t, worst_t, result, RESULT_ROWS);
