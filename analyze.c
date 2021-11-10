@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 #include "analyze.h"
 #include "algorithm.h"
@@ -17,7 +18,7 @@ int* arrayInitializer(int* arr, int arraySize ,const direction_t dir) {
         }
     } else {
         for (int i = 0; i < arraySize; i++) {
-            arr[i] = SIZE_START-i;
+            arr[i] = arraySize-i;
         }
     }
 
@@ -35,11 +36,15 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         size = 512 * pow(2, i);
         int arr[size];
         int* ptr = arrayInitializer(arr, size, asc);
-        for(int i = 0; i != size; i++) {
-            if(i == size-1) {
-                printf("%d\n", ptr[i]);
-            }
-        }
+        clock_t t;
+            t = clock();
+        bubble_sort(ptr,size);
+           /* for(int i=0;i !=size;i++){
+            printf("%d\n",ptr[i]);
+            }*/
+        t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("fun() took %f seconds to execute \n", time_taken);
     }
 
 }
