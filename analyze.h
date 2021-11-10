@@ -13,6 +13,11 @@ typedef enum {
 	binary_search_t
 } algorithm_t;
 
+typedef enum {
+	asc,
+	desc
+} direction_t;
+
 // case_t defines different cases
 typedef enum {
 	best_t,
@@ -29,5 +34,6 @@ typedef struct {
 // benchmark benchmarks an algorithm a for a specific case c, writing n results
 // to the result buffer buf
 void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n);
+void arrayInitializer(const direction_t dir);
 
 #endif
