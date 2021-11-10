@@ -96,8 +96,6 @@ void ui_run()
 			// Bubble sort
 			case 'c':
 				benchmark(bubble_sort_t, best_t, result, RESULT_ROWS);
-				direction_t dir = asc;
-				arrayInitializer(dir);
 				printf("todo> implemenet BE + present results in FE\n");
 				break;
 			case 'd':
