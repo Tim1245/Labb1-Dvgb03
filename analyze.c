@@ -32,4 +32,5 @@ void arrayInitializer(const direction_t dir) {
 //
 void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
 {
+    
 }
