@@ -1,0 +1,6 @@
+algorithm.o
+analyze.o
+io.o
+main.o
+ui.o
+main
