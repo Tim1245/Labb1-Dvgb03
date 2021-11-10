@@ -63,7 +63,6 @@ static void ui_menu()
 		"Binary sort best case",
 		"Binary sort worst case",
 		"Binary sort average case\n",
-		// TODO: complete menu
 	};
 
 	ui_line('=', MENU_WIDTH);
