@@ -57,12 +57,12 @@ static void ui_menu()
 		"Quick sort best case",
 		"Quick sort worst case",
 		"Quick sort average case\n",
-		"Linear sort best case",
-		"Linear sort worst case",
-		"Linear sort average case\n",
-		"Binary sort best case",
-		"Binary sort worst case",
-		"Binary sort average case\n",
+		"Linear search best case",
+		"Linear search worst case",
+		"Linear search average case\n",
+		"Binary search best case",
+		"Binary search worst case",
+		"Binary search average case\n",
 	};
 
 	ui_line('=', MENU_WIDTH);
