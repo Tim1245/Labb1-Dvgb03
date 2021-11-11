@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <time.h>
 
@@ -10,19 +11,46 @@
 // Private
 //
 
-int* arrayInitializer(int* arr, int arraySize ,const direction_t dir) {
+int* arrayInitializer(int* arr, int arraySize ,const complexity_t cx) {
 
-    if(dir == asc) {
+    switch (cx) {
+    case n:
         for (int i = 0; i < arraySize; i++) {
             arr[i] = i+1;
         }
-    } else {
+    break;
+    case n2:
         for (int i = 0; i < arraySize; i++) {
             arr[i] = arraySize-i;
         }
+    break;
+    case nlogn:
+        srand(time(0));
+        for (int i = 0; i < arraySize; i++) {
+            arr[i] = rand() % arraySize + 1;
+        }  
+    default:
+        break;
     }
 
     return arr;
+}
+
+complexity_t complexity(const algorithm_t a, const case_t c) {
+    switch (a) {
+        case bubble_sort_t:
+        case insertion_sort_t:
+            return c == best_t ? n : (c == worst_t ? n2 : nlogn);
+        break;
+        case quick_sort_t:
+            return c == best_t ? nlogn : (c == worst_t ? n : nlogn);
+        break;
+        case linear_search_t:
+        case binary_search_t:
+        default:
+            return n;
+        break;
+    }
 }
 
 
@@ -39,12 +67,9 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             size = 512 * pow(2, i);
             int arr[size];
             int* ptr;
-            if(c == 0){
-                ptr = arrayInitializer(arr, size, asc);
-        }   else{
-            ptr = arrayInitializer(arr, size, desc);
-        }
-
+            ptr = arrayInitializer(arr, size, complexity(a,c));
+            /* for(int i=0;i !=size;i++){
+                printf("%d\n",ptr[i]);} */
             clock_t t;
             switch (a)
             {
@@ -64,8 +89,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
                 break;
             }
            
-            /*for(int i=0;i !=size;i++){
-                printf("%d\n",ptr[i]);}*/
+            
             
 
             t = clock() - t;

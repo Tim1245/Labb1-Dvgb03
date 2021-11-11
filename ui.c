@@ -95,26 +95,43 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	case bubble_sort_t:
 	case insertion_sort_t:
 		if(c == best_t) {
-			printf("Size\tT (s)\t\tT/logn\t\tT/n\t\tT/nlog\n");
+			printf("Size\tT (s)\t\tT/n\n");
+			ui_line('~', PRINT_WIDTH);
+			for(int i = 0; i < RESULT_ROWS; i++) {
+				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n);
+			}
 		} else {
-			printf("Size\tT (s)\t\tT/nlogn\t\tT/n^2\t\tT/n^3\n");
+			printf("Size\tT (s)\t\tT/n^2\n");
+			ui_line('~', PRINT_WIDTH);
+			for(int i = 0; i < RESULT_ROWS; i++) {
+				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n2);
+			}
 		}
 	break;
-	
+	case quick_sort_t:
+		if(c == best_t) {
+			printf("Size\tT (s)\t\tT/nlogn\n");
+			ui_line('~', PRINT_WIDTH);
+			for(int i = 0; i < RESULT_ROWS; i++) {
+				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].nlogn);
+			}
+		} else if(c == worst_t) {
+			printf("Size\tT (s)\t\tT/n^2\n");
+			ui_line('~', PRINT_WIDTH);
+			for(int i = 0; i < RESULT_ROWS; i++) {
+				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n2);
+			}
+		} else {
+			printf("Size\tT (s)\t\tT/nlogn\n");
+			ui_line('~', PRINT_WIDTH);
+			for(int i = 0; i < RESULT_ROWS; i++) {
+				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].nlogn);
+			}
+		}
 	default:
 		break;
 	}
 
-	ui_line('~', PRINT_WIDTH);
-	if(c == 0){
-		for(int i = 0; i < RESULT_ROWS; i++) {
-		printf("%d\t%.8f\t%E\t%E\t%E \n",buf[i].size, buf[i].time,buf[i].logn,buf[i].n,buf[i].nlog);
-		}
-	}else{
-		for(int i = 0; i < RESULT_ROWS; i++) {
-		printf("%d\t%.8f\t%E\t%E\t%E\n",buf[i].size, buf[i].time,buf[i].nlogn,buf[i].n2,buf[i].n3);
-	}
-}	
 }
 
 //
@@ -152,7 +169,7 @@ void ui_run()
 				break;
 			case 'e':
 				benchmark(bubble_sort_t, average_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(bubble_sort_t,  average_t, result);
 				break;
 			case 'f':
 				benchmark(insertion_sort_t, best_t, result, RESULT_ROWS);
@@ -164,7 +181,7 @@ void ui_run()
 				break;
 			case 'h':
 				benchmark(insertion_sort_t, average_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(insertion_sort_t,  average_t, result);
 				break;
 			case 'i':
 				benchmark(quick_sort_t, best_t, result, RESULT_ROWS);
@@ -172,11 +189,11 @@ void ui_run()
 				break;
 			case 'j':
 				benchmark(quick_sort_t, worst_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(quick_sort_t,  worst_t, result);
 				break;
 			case 'k':
 				benchmark(quick_sort_t, average_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(quick_sort_t,  average_t, result);
 				break;
 			case 'l':
 				benchmark(linear_search_t, best_t, result, RESULT_ROWS);

@@ -14,9 +14,10 @@ typedef enum {
 } algorithm_t;
 
 typedef enum {
-	asc,
-	desc
-} direction_t;
+	n,
+	n2,
+	nlogn
+} complexity_t;
 
 // case_t defines different cases
 typedef enum {
