@@ -16,6 +16,27 @@ int arraySortedOrNot(int* a, int n)
     return arraySortedOrNot(a, n - 1);
 }
 
+int partition(int* a, int c, int b) {
+    int pivot, lower, upper, temp;
+    pivot = a[c];
+    lower = c + 1;
+    upper = b;
+    do {
+        while (a[lower] <= pivot && lower <= upper) lower = lower + 1;
+        while (a[upper] > pivot && lower <= upper) upper = upper - 1;
+        if (lower <= upper) {
+            temp = a[lower];
+            a[lower] = a[upper];
+            a[upper] = temp;
+            lower = lower + 1;
+            upper = upper - 1;}
+        }
+    while (lower <= upper);
+    temp = a[upper];
+    a[upper] = a[c];
+    a[c] = temp;
+return upper;}
+
 //
 // Public
 //
@@ -44,9 +65,13 @@ void insertion_sort(int *a, int n)
 	// TODO: insertion sort
 }
 
-void quick_sort(int *a, int n)
+void quick_sort(int *a,int c, int n)
 {
-	// TODO: quick sort
+	int k;
+    if (c < n) {
+        k = partition(a, c, n);
+        quick_sort(a, c, k-1);
+        quick_sort(a, k+1, n);}
 }
 
 bool linear_search(const int *a, int n, int v)

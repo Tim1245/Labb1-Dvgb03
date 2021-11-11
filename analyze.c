@@ -47,7 +47,8 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         
         clock_t t;
             t = clock();
-            bubble_sort(ptr,size);
+            //bubble_sort(ptr,size);
+            quick_sort(ptr,0,size-1);
            /* for(int i=0;i !=size;i++){
             printf("%d\n",ptr[i]);
             }*/

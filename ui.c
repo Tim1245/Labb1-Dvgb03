@@ -158,7 +158,7 @@ void ui_run()
 				break;
 			case 'i':
 				benchmark(quick_sort_t, best_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(quick_sort_t,  best_t, result);
 				break;
 			case 'j':
 				benchmark(quick_sort_t, worst_t, result, RESULT_ROWS);
