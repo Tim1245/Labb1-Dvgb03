@@ -85,52 +85,19 @@ static const char * const best_str[] = {
 	[average_t] = "Average"
 };
 
+static const char * const complexity_str[] = {
+	[n] = "n",
+	[n2] = "n2",
+	[nlogn] = "nlogn"
+};
+
 static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 {
 	ui_line('*', PRINT_WIDTH);
 	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
 	ui_line('~', PRINT_WIDTH);
-	switch (a)
-	{
-	case bubble_sort_t:
-	case insertion_sort_t:
-		if(c == best_t) {
-			printf("Size\tT (s)\t\tT/n\n");
-			ui_line('~', PRINT_WIDTH);
-			for(int i = 0; i < RESULT_ROWS; i++) {
-				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n);
-			}
-		} else {
-			printf("Size\tT (s)\t\tT/n^2\n");
-			ui_line('~', PRINT_WIDTH);
-			for(int i = 0; i < RESULT_ROWS; i++) {
-				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n2);
-			}
-		}
-	break;
-	case quick_sort_t:
-		if(c == best_t) {
-			printf("Size\tT (s)\t\tT/nlogn\n");
-			ui_line('~', PRINT_WIDTH);
-			for(int i = 0; i < RESULT_ROWS; i++) {
-				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].nlogn);
-			}
-		} else if(c == worst_t) {
-			printf("Size\tT (s)\t\tT/n^2\n");
-			ui_line('~', PRINT_WIDTH);
-			for(int i = 0; i < RESULT_ROWS; i++) {
-				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].n2);
-			}
-		} else {
-			printf("Size\tT (s)\t\tT/nlogn\n");
-			ui_line('~', PRINT_WIDTH);
-			for(int i = 0; i < RESULT_ROWS; i++) {
-				printf("%d\t%.8f\t%e\n",buf[i].size, buf[i].time, buf[i].nlogn);
-			}
-		}
-	default:
-		break;
-	}
+	
+	printf("Size\tT (s)\t\t%s\n", complexity_str[buf[0].comp_dir.cx]);
 
 }
 

@@ -19,6 +19,12 @@ typedef enum {
 	nlogn
 } complexity_t;
 
+typedef enum {
+	asc,
+	desc,
+	random
+} direction_t;
+
 // case_t defines different cases
 typedef enum {
 	best_t,
@@ -26,15 +32,21 @@ typedef enum {
 	average_t
 } case_t;
 
+typedef struct {
+	complexity_t cx;
+	direction_t dir;
+} comp_dir_t;
+
 // result_t defines a timed measurement for a given array size
 typedef struct {
 	int size;
-	double time,nlog,logn,nlogn,n,n2,n3;
-
+	double time,n;
+	comp_dir_t comp_dir;
 } result_t;
 
 // benchmark benchmarks an algorithm a for a specific case c, writing n results
 // to the result buffer buf
 void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n);
+comp_dir_t complexity(const algorithm_t a, const case_t c);
 
 #endif

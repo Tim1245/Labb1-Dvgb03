@@ -11,20 +11,20 @@
 // Private
 //
 
-int* arrayInitializer(int* arr, int arraySize ,const complexity_t cx) {
+int* arrayInitializer(int* arr, int arraySize ,const direction_t dir) {
 
-    switch (cx) {
-    case n:
+    switch (dir) {
+    case asc:
         for (int i = 0; i < arraySize; i++) {
             arr[i] = i+1;
         }
     break;
-    case n2:
+    case desc:
         for (int i = 0; i < arraySize; i++) {
             arr[i] = arraySize-i;
         }
     break;
-    case nlogn:
+    case random:
         srand(time(0));
         for (int i = 0; i < arraySize; i++) {
             arr[i] = rand() % arraySize + 1;
@@ -36,19 +36,42 @@ int* arrayInitializer(int* arr, int arraySize ,const complexity_t cx) {
     return arr;
 }
 
-complexity_t complexity(const algorithm_t a, const case_t c) {
+comp_dir_t complexity(const algorithm_t a, const case_t c) {
+    comp_dir_t comp_dir;
     switch (a) {
         case bubble_sort_t:
         case insertion_sort_t:
-            return c == best_t ? n : (c == worst_t ? n2 : nlogn);
+            if(c == best_t) {
+                comp_dir.cx = n;
+                comp_dir.dir = asc;
+            } else if (c == worst_t) {
+                comp_dir.cx = n2;
+                comp_dir.dir = desc;
+            } else {
+                comp_dir.cx = n2;
+                comp_dir.dir = random;
+            }
+            return comp_dir;
         break;
         case quick_sort_t:
-            return c == best_t ? nlogn : (c == worst_t ? n : nlogn);
+            if(c == best_t) {
+                comp_dir.cx = nlogn;
+                comp_dir.dir = random;
+            } else if (c == worst_t) {
+                comp_dir.cx = n2;
+                comp_dir.dir = desc;
+            } else {
+                comp_dir.cx = nlogn;
+                comp_dir.dir = random;
+            }
+            return comp_dir;
         break;
         case linear_search_t:
         case binary_search_t:
         default:
-            return n;
+            comp_dir.cx = n;
+            comp_dir.dir = asc;
+            return comp_dir;
         break;
     }
 }
@@ -62,12 +85,14 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
 {
     int size, i, j;
     double time_taken;
+    comp_dir_t comp_dir = complexity(a,c);
+
     for (i = 0; i != n; i++) {
         for (j = 0; j < ITERATIONS; j++) {
             size = 512 * pow(2, i);
             int arr[size];
             int* ptr;
-            ptr = arrayInitializer(arr, size, complexity(a,c));
+            ptr = arrayInitializer(arr, size, comp_dir.dir);
             /* for(int i=0;i !=size;i++){
                 printf("%d\n",ptr[i]);} */
             clock_t t;
@@ -88,10 +113,6 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             default:
                 break;
             }
-           
-            
-            
-
             t = clock() - t;
             time_taken = time_taken + ((double)t)/CLOCKS_PER_SEC;
            
@@ -99,12 +120,8 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         buf[i].size = size;
         double timediv = time_taken/ITERATIONS;
         buf[i].time = timediv;
-        buf[i].nlog = timediv/(size*log(size)); //vafan är "nlog"
-        buf[i].logn = timediv/log(size);
-        buf[i].nlogn = timediv/(size * log(size));
-        buf[i].n = timediv/size;
-        buf[i].n2 = timediv/pow(size,2);
-        buf[i].n3 = timediv/pow(size,3);
     }
+
+    buf[0].comp_dir = comp_dir;
 
 }
