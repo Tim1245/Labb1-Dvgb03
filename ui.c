@@ -90,19 +90,29 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	ui_line('*', PRINT_WIDTH);
 	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
 	ui_line('~', PRINT_WIDTH);
-	if(c == 0){
-		printf("Size\tT (s)\t\tT/logn\t\tT/n\t\tT/nlog\n");
-	}else{
-		printf("Size\tT (s)\t\tT/nlogn\t\tT/n^2\t\tT/n^3\n");
+	switch (a)
+	{
+	case bubble_sort_t:
+	case insertion_sort_t:
+		if(c == best_t) {
+			printf("Size\tT (s)\t\tT/logn\t\tT/n\t\tT/nlog\n");
+		} else {
+			printf("Size\tT (s)\t\tT/nlogn\t\tT/n^2\t\tT/n^3\n");
+		}
+	break;
+	
+	default:
+		break;
 	}
+
 	ui_line('~', PRINT_WIDTH);
 	if(c == 0){
 		for(int i = 0; i < RESULT_ROWS; i++) {
-		printf("%d\t%f\t%E\t%E\t%E \n",buf[i].size, buf[i].time,buf[i].logn,buf[i].n,buf[i].nlog);
+		printf("%d\t%.8f\t%E\t%E\t%E \n",buf[i].size, buf[i].time,buf[i].logn,buf[i].n,buf[i].nlog);
 		}
 	}else{
 		for(int i = 0; i < RESULT_ROWS; i++) {
-		printf("%d\t%f\t%E\t%E\t%E\n",buf[i].size, buf[i].time,buf[i].nlogn,buf[i].n2,buf[i].n3);
+		printf("%d\t%.8f\t%E\t%E\t%E\n",buf[i].size, buf[i].time,buf[i].nlogn,buf[i].n2,buf[i].n3);
 	}
 }	
 }
@@ -146,11 +156,11 @@ void ui_run()
 				break;
 			case 'f':
 				benchmark(insertion_sort_t, best_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(insertion_sort_t,  best_t, result);
 				break;
 			case 'g':
 				benchmark(insertion_sort_t, worst_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(insertion_sort_t,  worst_t, result);
 				break;
 			case 'h':
 				benchmark(insertion_sort_t, average_t, result, RESULT_ROWS);
