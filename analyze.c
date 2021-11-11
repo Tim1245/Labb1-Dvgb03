@@ -37,21 +37,37 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
     for (i = 0; i != n; i++) {
         for (j = 0; j < ITERATIONS; j++) {
             size = 512 * pow(2, i);
-        int arr[size];
-        int* ptr;
-        if(c == 0){
-            ptr = arrayInitializer(arr, size, asc);
-        }else{
+            int arr[size];
+            int* ptr;
+            if(c == 0){
+                ptr = arrayInitializer(arr, size, asc);
+        }   else{
             ptr = arrayInitializer(arr, size, desc);
         }
-        
-        clock_t t;
-            t = clock();
-            //bubble_sort(ptr,size);
-            quick_sort(ptr,0,size-1);
-           /* for(int i=0;i !=size;i++){
-            printf("%d\n",ptr[i]);
-            }*/
+
+            clock_t t;
+            switch (a)
+            {
+            case bubble_sort_t:
+                t = clock();
+                bubble_sort(ptr, size);
+            break;
+            case insertion_sort_t:
+                t = clock();
+                insertion_sort(ptr, size);
+            break;
+            case quick_sort_t:
+                t = clock();
+                quick_sort(ptr, 0, size-1);
+            break;
+            default:
+                break;
+            }
+           
+            /*for(int i=0;i !=size;i++){
+                printf("%d\n",ptr[i]);}*/
+            
+
             t = clock() - t;
             time_taken = time_taken + ((double)t)/CLOCKS_PER_SEC;
            

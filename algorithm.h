@@ -3,6 +3,8 @@
 
 #include <stdbool.h> // bool
 
+void dummyLoop();
+
 // bubble_sort sorts an array arr of length n
 void bubble_sort(int *arr, int n);
 

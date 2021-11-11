@@ -46,6 +46,7 @@ void bubble_sort(int *a, int n)
     if(arraySortedOrNot(a, n)) {
         return;
     }
+
     int swap, i, j;
 
 	for(i = 0; i < n-1; i++){ 
@@ -62,7 +63,17 @@ void bubble_sort(int *a, int n)
 
 void insertion_sort(int *a, int n)
 {
-	// TODO: insertion sort
+	int i, key, j;
+    for (i = 1; i < n; i++) {
+        key = a[i];
+        j = i - 1;
+ 
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            j = j - 1;
+        }
+        a[j + 1] = key;
+    }
 }
 
 void quick_sort(int *a,int c, int n)
