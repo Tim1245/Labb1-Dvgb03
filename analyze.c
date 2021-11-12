@@ -67,6 +67,18 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
             return comp_dir;
         break;
         case linear_search_t:
+            if(c == best_t) {
+                comp_dir.cx = one;
+                comp_dir.dir = asc;
+            } else if (c == worst_t) {
+                comp_dir.cx = n;
+                comp_dir.dir = asc;
+            } else {
+                comp_dir.cx = ndiv2;
+                comp_dir.dir = asc;
+            }
+            return comp_dir;
+        break;
         case binary_search_t:
              if(c == best_t) {
                 comp_dir.cx = one;
@@ -94,7 +106,7 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
 void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
 {
     int size, i, j;
-    double time_taken;
+    double time_taken = 0;
     comp_dir_t comp_dir = complexity(a,c);
 
     for (i = 0; i != n; i++) {
@@ -103,8 +115,8 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             int arr[size];
             int* ptr;
             ptr = arrayInitializer(arr, size, comp_dir.dir);
-            /* for(int i=0;i !=size;i++){
-                printf("%d\n",ptr[i]);} */
+           /*  for(int i=0;i !=size;i++){
+                printf("%d\n",ptr[i]);}  */
             clock_t t;
             switch (a)
             {
@@ -119,8 +131,9 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             case quick_sort_t:
                 t = clock();
                 quick_sort(ptr, 0, size-1);
-            break;
             case linear_search_t:
+                t = clock();
+                linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size : size/2)));   // SIZE/2 ??? hur funkar average case här
             break;
             case binary_search_t:
                 t = clock();
@@ -131,8 +144,8 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             }
             t = clock() - t;
             time_taken = time_taken + ((double)t)/CLOCKS_PER_SEC;
-           
         }
+
         buf[i].size = size;
         double timediv = time_taken/ITERATIONS;
         buf[i].time = timediv;
