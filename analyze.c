@@ -111,7 +111,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
     double time_taken = 0;
     comp_dir_t comp_dir = complexity(a,c);
 
-    for (i = 0; i != n; i++) {
+    for (i = 0; i < n; i++) {
         for (j = 0; j < ITERATIONS; j++) {
             size = 512 * pow(2, i);
             int arr[size];
@@ -149,26 +149,26 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         }
 
         buf[i].size = size;
-        double timediv = time_taken/ITERATIONS;
-        buf[i].time = timediv;
+        time_taken = time_taken/ITERATIONS;
+        buf[i].time = time_taken;
         switch(comp_dir.cx){
             case 0:
-                buf[i].first = timediv/size;
+                buf[i].first = time_taken/size;
             break;
             case n2:
-                buf[i].first = timediv/pow(size, 2);
+                buf[i].first = time_taken/pow(size, 2);
             break;
             case ndiv2:
-                buf[i].first = timediv/(size/2);
+                buf[i].first = time_taken/(size/2);
             break;
             case logn:
-                buf[i].first = timediv/log(size);
+                buf[i].first = time_taken/log(size);
             break;
             case nlogn:
-                buf[i].first = timediv/(size*log(size));
+                buf[i].first = time_taken/(size*log(size));
             break;
             case one:
-                buf[i].first = timediv;
+                buf[i].first = time_taken;
             break;
         }
         
