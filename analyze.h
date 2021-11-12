@@ -43,7 +43,7 @@ typedef struct {
 // result_t defines a timed measurement for a given array size
 typedef struct {
 	int size;
-	double time,n;
+	double time,first;
 	comp_dir_t comp_dir;
 } result_t;
 

@@ -100,9 +100,10 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
 	ui_line('~', PRINT_WIDTH);
 	
-	printf("Size\tT (s)\t\t%s\n", complexity_str[buf[0].comp_dir.cx]);
+	printf("Size\tT (s)\t\tT/%s\n", complexity_str[buf[0].comp_dir.cx]);
+	ui_line('~', PRINT_WIDTH);
 	for(int i = 0;i < RESULT_ROWS; i++) {
-		printf("%d\t%.8f\n", buf[i].size, buf[i].time);
+		printf("%d\t%.8f\t%e\n", buf[i].size, buf[i].time, buf[i].first);
 	}
 
 }

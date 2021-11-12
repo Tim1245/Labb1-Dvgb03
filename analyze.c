@@ -90,6 +90,8 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
                 comp_dir.cx = logn;
                 comp_dir.dir = asc;
             }
+            return comp_dir;
+        break;
         default:
             comp_dir.cx = n;
             comp_dir.dir = asc;
@@ -149,6 +151,27 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         buf[i].size = size;
         double timediv = time_taken/ITERATIONS;
         buf[i].time = timediv;
+        switch(comp_dir.cx){
+            case 0:
+                buf[i].first = timediv/size;
+            break;
+            case n2:
+                buf[i].first = timediv/pow(size, 2);
+            break;
+            case ndiv2:
+                buf[i].first = timediv/(size/2);
+            break;
+            case logn:
+                buf[i].first = timediv/log(size);
+            break;
+            case nlogn:
+                buf[i].first = timediv/(size*log(size));
+            break;
+            case one:
+                buf[i].first = timediv;
+            break;
+        }
+        
     }
 
     buf[0].comp_dir = comp_dir;
