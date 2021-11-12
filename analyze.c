@@ -68,6 +68,16 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
         break;
         case linear_search_t:
         case binary_search_t:
+             if(c == best_t) {
+                comp_dir.cx = one;
+                comp_dir.dir = asc;
+            } else if (c == worst_t) {
+                comp_dir.cx = logn;
+                comp_dir.dir = random;
+            } else {
+                comp_dir.cx = logn;
+                comp_dir.dir = random;
+            }
         default:
             comp_dir.cx = n;
             comp_dir.dir = asc;
@@ -109,6 +119,12 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             case quick_sort_t:
                 t = clock();
                 quick_sort(ptr, 0, size-1);
+            break;
+            case linear_search_t:
+            break;
+            case binary_search_t:
+                t = clock();
+                binary_search(ptr,size,20);
             break;
             default:
                 break;

@@ -16,7 +16,9 @@ typedef enum {
 typedef enum {
 	n,
 	n2,
-	nlogn
+	nlogn,
+	logn,
+	one
 } complexity_t;
 
 typedef enum {

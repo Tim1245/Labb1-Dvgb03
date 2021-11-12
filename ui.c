@@ -98,6 +98,9 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	ui_line('~', PRINT_WIDTH);
 	
 	printf("Size\tT (s)\t\t%s\n", complexity_str[buf[0].comp_dir.cx]);
+	for(int i=0 ;i<RESULT_ROWS;i++){
+		printf("%d\t%f\t\t\n",buf[i].size,buf[i].time);
+	}
 
 }
 
@@ -176,15 +179,15 @@ void ui_run()
 				break;
 			case 'o':
 				benchmark(binary_search_t, best_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(binary_search_t,  best_t, result);
 				break;
 			case 'p':
 				benchmark(binary_search_t, worst_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(binary_search_t,  worst_t, result);
 				break;
 			case 'q':
 				benchmark(binary_search_t, average_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(binary_search_t,  average_t, result);
 				break;
 			// Invalid input
 			default:
