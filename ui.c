@@ -88,7 +88,10 @@ static const char * const best_str[] = {
 static const char * const complexity_str[] = {
 	[n] = "n",
 	[n2] = "n2",
-	[nlogn] = "nlogn"
+	[ndiv2] = "n/2",
+	[logn] = "logn",
+	[nlogn] = "nlogn",
+	[one] = "1"
 };
 
 static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
@@ -98,6 +101,9 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	ui_line('~', PRINT_WIDTH);
 	
 	printf("Size\tT (s)\t\t%s\n", complexity_str[buf[0].comp_dir.cx]);
+	for(int i = 0;i < RESULT_ROWS; i++) {
+		printf("%d\t%.8f\n", buf[i].size, buf[i].time);
+	}
 
 }
 
@@ -164,15 +170,15 @@ void ui_run()
 				break;
 			case 'l':
 				benchmark(linear_search_t, best_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(linear_search_t,  best_t, result);
 				break;
 			case 'm':
 				benchmark(linear_search_t, worst_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(linear_search_t,  worst_t, result);
 				break;
 			case 'n':
 				benchmark(linear_search_t, average_t, result, RESULT_ROWS);
-				printf("todo> implemenet BE + present results in FE\n");
+				ui_print_table(linear_search_t,  average_t, result);
 				break;
 			case 'o':
 				benchmark(binary_search_t, best_t, result, RESULT_ROWS);
