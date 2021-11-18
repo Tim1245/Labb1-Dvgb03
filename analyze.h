@@ -2,7 +2,7 @@
 #define ANALYZE_H
 
 #define SIZE_START 512
-#define ITERATIONS 40
+#define ITERATIONS 4
 #define BILLION 1000000000
 
 // algorithm_t defines different algorithms

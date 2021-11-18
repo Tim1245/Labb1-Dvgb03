@@ -120,6 +120,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             int* ptr;
             ptr = arrayInitializer(arr, size, comp_dir.dir);
            
+           
             struct timespec start, stop;
             switch (a)
             {
