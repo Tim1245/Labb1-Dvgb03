@@ -159,28 +159,28 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         switch(comp_dir.cx){
             case on:
                 buf[i].actual = (time_taken)/size;
-                buf[i].better = time_taken/log(size);
-                buf[i].worse = time_taken/(size*log(size));
+                buf[i].better = time_taken/log2(size);
+                buf[i].worse = time_taken/(size*log2(size));
             break;
             case on2:
                 buf[i].actual = time_taken/pow(size, 2);
-                buf[i].better = time_taken/(size*log(size));
+                buf[i].better = time_taken/(size*log2(size));
                 buf[i].worse = time_taken/pow(size,3);
             break;
             case ologn:
-                buf[i].actual = time_taken/log(size);
+                buf[i].actual = time_taken/log2(size);
                 buf[i].better = time_taken;
                 buf[i].worse = (time_taken)/size;
             break;
             case onlogn:
-                buf[i].actual = time_taken/(size*log(size));
+                buf[i].actual = time_taken/(size*log2(size));
                 buf[i].better = (time_taken)/size;
                 buf[i].worse = time_taken/pow(size, 2);
             break;
             case oone:
                 buf[i].actual = time_taken;
                 buf[i].better = time_taken;
-                buf[i].worse = time_taken/log(size);
+                buf[i].worse = time_taken/log2(size);
             break;
             default:
             break;
