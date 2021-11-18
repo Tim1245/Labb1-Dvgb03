@@ -5,19 +5,15 @@
 // Private
 //
 
-int arraySortedOrNot(int* a, int n)
+void swap(int *xp, int *yp)
 {
-    if (n == 1 || n == 0)
-        return 1;
-
-    if (a[n - 1] < a[n - 2])
-        return 0;
-        
-    return arraySortedOrNot(a, n - 1);
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
 
 int partition(int* a, int c, int b) {
-    int pivot, lower, upper, temp;
+    int pivot, lower, upper;
     pivot = a[c];
     lower = c + 1;
     upper = b;
@@ -25,16 +21,12 @@ int partition(int* a, int c, int b) {
         while (a[lower] <= pivot && lower <= upper) lower = lower + 1;
         while (a[upper] > pivot && lower <= upper) upper = upper - 1;
         if (lower <= upper) {
-            temp = a[lower];
-            a[lower] = a[upper];
-            a[upper] = temp;
+            swap(&a[lower], &a[upper]);
             lower = lower + 1;
             upper = upper - 1;}
         }
     while (lower <= upper);
-    temp = a[upper];
-    a[upper] = a[c];
-    a[c] = temp;
+        swap(&a[upper], &a[c]);
 return upper;}
 
 //
@@ -43,21 +35,19 @@ return upper;}
 
 void bubble_sort(int *a, int n)
 {	
-    if(arraySortedOrNot(a, n)) {
-        return;
-    }
-
-    int swap, i, j;
-
-	for(i = 0; i < n-1; i++){ 
-        for(j = 0; j < n-i-1; j++)
-            if(a[j]>a[j+1]){
-
-                swap =a[j];
-                a[j]=a[j+1];
-                a[j+1]=swap;
-               
+    int i, j;
+    bool swapped;
+    for (i = 0; i < n-1; i++) {
+        swapped = false;
+        for (j = 0; j < n-i-1; j++) {
+            if (a[j] > a[j+1]) {
+                swap(&a[j], &a[j+1]);
+                swapped = true;
             }
+        }
+        
+        if (swapped == false)
+            break;
     }
 }
 

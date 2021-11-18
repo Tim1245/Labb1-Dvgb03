@@ -4,6 +4,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 //
 // Private
@@ -86,24 +87,24 @@ static const char * const best_str[] = {
 };
 
 static const char * const complexity_str[] = {
-	[n] = "n",
-	[n2] = "n2",
-	[ndiv2] = "n/2",
-	[logn] = "logn",
-	[nlogn] = "nlogn",
-	[one] = "1"
+	[on] = "n",
+	[on2] = "n^2",
+	[on3] = "n^3",
+	[ologn] = "logn",
+	[onlogn] = "nlogn",
+	[oone] = "1"
 };
 
 static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
-{
+{	
 	ui_line('*', PRINT_WIDTH);
 	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
 	ui_line('~', PRINT_WIDTH);
-	
-	printf("Size\tT (s)\t\tT/%s\n", complexity_str[buf[0].comp_dir.cx]);
+
+	printf("Size\tT (s)\t\tT/%s\t\tT/%s\t\tT/%s\n", (buf[0].comp_dir.cx > 0 ? complexity_str[buf[0].comp_dir.cx-1] : complexity_str[buf[0].comp_dir.cx]), complexity_str[buf[0].comp_dir.cx], complexity_str[buf[0].comp_dir.cx+1]);
 	ui_line('~', PRINT_WIDTH);
 	for(int i = 0;i < RESULT_ROWS; i++) {
-		printf("%d\t%.8f\t%e\n", buf[i].size, buf[i].time, buf[i].first);
+		printf("%d\t%.8f\t%e\t%e\t%e\n", buf[i].size, buf[i].time, buf[i].better, buf[i].actual, buf[i].worse);
 	}
 
 }

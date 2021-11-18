@@ -2,7 +2,8 @@
 #define ANALYZE_H
 
 #define SIZE_START 512
-#define ITERATIONS 4
+#define ITERATIONS 40
+#define BILLION 1000000000
 
 // algorithm_t defines different algorithms
 typedef enum {
@@ -14,18 +15,18 @@ typedef enum {
 } algorithm_t;
 
 typedef enum {
-	n,
-	n2,
-	ndiv2,
-	logn,
-	nlogn,
-	one
+	oone,
+	ologn,
+	on,
+	onlogn,
+	on2,
+	on3
 } complexity_t;
 
 typedef enum {
 	asc,
 	desc,
-	random
+	unsorted
 } direction_t;
 
 // case_t defines different cases
@@ -43,7 +44,7 @@ typedef struct {
 // result_t defines a timed measurement for a given array size
 typedef struct {
 	int size;
-	double time,first;
+	double time, actual, better, worse;
 	comp_dir_t comp_dir;
 } result_t;
 
