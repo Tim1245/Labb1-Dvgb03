@@ -58,7 +58,7 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
         case quick_sort_t:
             if(c == best_t) {
                 comp_dir.cx = onlogn;
-                comp_dir.dir = unsorted;
+                comp_dir.dir = asc;
             } else if (c == worst_t) {
                 comp_dir.cx = on2;
                 comp_dir.dir = asc;
@@ -120,7 +120,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             int* ptr;
             ptr = arrayInitializer(arr, size, comp_dir.dir);
            
-           
+
             struct timespec start, stop;
             switch (a)
             {
@@ -134,7 +134,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, 0, size-1);
+                quick_sort(ptr, (c == best_t ? size/2 : 0), size-1);
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
                 linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size : size/2)));   // SIZE/2 ??? hur funkar average case här
@@ -149,8 +149,6 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             clock_gettime(CLOCK_MONOTONIC, &stop);
             
             time_taken += BILLION * (stop.tv_sec - start.tv_sec) + stop.tv_nsec - start.tv_nsec;
-            /* for(int i=0;i !=size;i++){
-                printf("%d\n",ptr[i]);}  */
         }
 
 

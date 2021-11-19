@@ -5,11 +5,11 @@
 // Private
 //
 
-void swap(int *xp, int *yp)
+void swap(int *ptr1, int *ptr2)
 {
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+    int temp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = temp;
 }
 
 int partition(int* a, int c, int b) {
@@ -37,8 +37,10 @@ void bubble_sort(int *a, int n)
 {	
     int i, j;
     bool swapped;
+    
     for (i = 0; i < n-1; i++) {
         swapped = false;
+
         for (j = 0; j < n-i-1; j++) {
             if (a[j] > a[j+1]) {
                 swap(&a[j], &a[j+1]);
@@ -72,7 +74,8 @@ void quick_sort(int *a,int c, int n)
     if (c < n) {
         k = partition(a, c, n);
         quick_sort(a, c, k-1);
-        quick_sort(a, k+1, n);}
+        quick_sort(a, k+1, n);
+    }
 }
 
 bool linear_search(const int *a, int n, int v)
@@ -88,23 +91,15 @@ bool binary_search(const int *a, int n, int v)
 	int r = n-1;
     int l = 0;
 
-     while (l <= r)
-  {
+    while (l <= r)
+    {
     int m = l + (r-l)/2;
-  
-    // Check if x is present at mid
     if (a[m] == v) 
         return m;  
-  
-    // If x greater, ignore left half  
     if (a[m] < v) 
         l = m + 1; 
-  
-    // If x is smaller, ignore right half 
     else 
          r = m - 1; 
-  }
-  
-  // if we reach here, then element was not present
-  return -1; 
+    }
+    return -1; 
  }
