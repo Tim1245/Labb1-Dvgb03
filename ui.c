@@ -100,7 +100,6 @@ static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 	ui_line('*', PRINT_WIDTH);
 	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
 	ui_line('~', PRINT_WIDTH);
-
 	printf("Size\tT (s)\t\tT/%s\t\tT/%s\t\tT/%s\n", (buf[0].comp_dir.cx > 0 ? complexity_str[buf[0].comp_dir.cx-1] : complexity_str[buf[0].comp_dir.cx]), complexity_str[buf[0].comp_dir.cx], complexity_str[buf[0].comp_dir.cx+1]);
 	ui_line('~', PRINT_WIDTH);
 	for(int i = 0;i < RESULT_ROWS; i++) {
@@ -133,7 +132,7 @@ void ui_run()
 			case 'b':
 				running = false;
 				break;
-			// Bubble sort
+			// Bubble Sort
 			case 'c':
 				benchmark(bubble_sort_t, best_t, result, RESULT_ROWS);
 				ui_print_table(bubble_sort_t, best_t, result);
@@ -146,6 +145,7 @@ void ui_run()
 				benchmark(bubble_sort_t, average_t, result, RESULT_ROWS);
 				ui_print_table(bubble_sort_t,  average_t, result);
 				break;
+			// Insertion Sort
 			case 'f':
 				benchmark(insertion_sort_t, best_t, result, RESULT_ROWS);
 				ui_print_table(insertion_sort_t,  best_t, result);
@@ -158,6 +158,7 @@ void ui_run()
 				benchmark(insertion_sort_t, average_t, result, RESULT_ROWS);
 				ui_print_table(insertion_sort_t,  average_t, result);
 				break;
+			// Quick Sort
 			case 'i':
 				benchmark(quick_sort_t, best_t, result, RESULT_ROWS);
 				ui_print_table(quick_sort_t,  best_t, result);
@@ -170,6 +171,7 @@ void ui_run()
 				benchmark(quick_sort_t, average_t, result, RESULT_ROWS);
 				ui_print_table(quick_sort_t,  average_t, result);
 				break;
+			// Linear Search
 			case 'l':
 				benchmark(linear_search_t, best_t, result, RESULT_ROWS);
 				ui_print_table(linear_search_t,  best_t, result);
@@ -182,6 +184,7 @@ void ui_run()
 				benchmark(linear_search_t, average_t, result, RESULT_ROWS);
 				ui_print_table(linear_search_t,  average_t, result);
 				break;
+			// Binary Search
 			case 'o':
 				benchmark(binary_search_t, best_t, result, RESULT_ROWS);
 				ui_print_table(binary_search_t,  best_t, result);

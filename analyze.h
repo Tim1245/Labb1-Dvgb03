@@ -36,6 +36,7 @@ typedef enum {
 	average_t
 } case_t;
 
+// comp_dir_t keeps track of complexity and array structure (sorted or unsorted)
 typedef struct {
 	complexity_t cx;
 	direction_t dir;
