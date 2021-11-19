@@ -135,8 +135,6 @@ void set_buffer(result_t *buf, const comp_dir_t comp_dir, int i, int size, doubl
 
 }
 
-
-
 //
 // Public
 //
@@ -167,7 +165,8 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, (c == best_t ? size/2 : 0), size-1);
+                quick_sort(ptr, (c == best_t ? size/2 : 0), size-1, (c == best_t ? 0 : 1));
+            break;
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
                 linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size + 1 : size/2)));

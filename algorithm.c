@@ -12,6 +12,39 @@ void swap(int *ptr1, int *ptr2)
     *ptr2 = temp;
 }
 
+int partition_pivot_last(int* a, int low, int high) {
+	int pivot = a[high];
+	int i = (low - 1);
+ 
+	for (int j = low; j < high; j++) {
+		if (a[j] < pivot) {
+		swap(&a[++i], &a[j]);
+		}
+	}
+ 
+	swap(&a[i + 1], &a[high]);
+	return (i + 1);
+}
+
+int partition_pivot_median(int* a, int low, int high) {
+	
+	int pivot;
+	int mid = (low + high) / 2;
+	if (a[mid] < a[low]) 
+		swap(&a[mid], &a[low]);
+	if (a[high] < a[low])
+		swap(&a[high], &a[low]);
+	if (a[high] < a[mid])
+		swap(&a[high], &a[mid]);
+	swap(&a[mid], &a[high-1]);
+	
+	pivot = a[high-1];
+
+    swap(&a[pivot], &a[low]);
+ 
+	return partition_pivot_last(a, low, high);
+}
+
 int partition(int* a, int c, int b) {
     int pivot, lower, upper;
     pivot = a[c];
@@ -68,13 +101,18 @@ void insertion_sort(int *a, int n)
     }
 }
 
-void quick_sort(int *a,int c, int n)
+void quick_sort(int *a,int c, int n, int cx)
 {
 	int k;
     if (c < n) {
-        k = partition(a, c, n);
-        quick_sort(a, c, k-1);
-        quick_sort(a, k+1, n);
+        if(cx == 0) {
+            k = partition_pivot_median(a, c, n);
+        } else {
+            k = partition_pivot_last(a, c, n);
+        }
+        
+        quick_sort(a, c, k-1, cx);
+        quick_sort(a, k+1, n, cx);
     }
 }
 
