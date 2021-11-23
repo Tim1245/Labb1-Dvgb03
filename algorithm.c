@@ -13,49 +13,29 @@ void swap(int *ptr1, int *ptr2)
     *ptr2 = temp;
 }
 
+// Setup to use partition with low or middle element
+int partition(int* a, int low, int high, int cx) {
 
-// Partition for Quick Sort
-int partition(int* a, int low, int high) {
-    int left, right;
     int pivot;
 
-    left = low;
-    right = high;
-    pivot = a[low];
-
-    while ( left < right )
-    {
-        while ( a[right] > pivot )
-        right--;
-
-        while ( (left < right) && (a[left] <= pivot) )
-        left++;
-
-        if ( left < right )
-        swap(&a[left], &a[right] );
+    if(cx == 0) {
+            pivot = a[low + (high - low)/2];
+    } else {
+            pivot = a[low];
     }
 
-    a[low] = a[right];
-    a[right] = pivot;
-
-    return right;
-}
-
-// Setup to use partition with median
-int median(int* a, int low, int high) {
-	
-    int middle = (low+high)/2;
-
-	if ( &a[low] > &a[middle] )
-		swap( &a[middle], &a[low] );
-	if ( &a[low] > &a[high] )
-		swap( &a[low], &a[high] );
-	if ( &a[middle] > &a[high] )
-		swap( &a[high], &a[middle] );
-
-	swap(&a[middle], &a[low]);
-
-	return partition(a, low, high);
+    int i = (low - 1);
+  
+    for (int j = low; j <= high - 1; j++) 
+    { 
+        if (a[j] < pivot) 
+        { 
+            i++;
+            swap(&a[i], &a[j]); 
+        } 
+    } 
+    swap(&a[i + 1], &a[high]); 
+    return (i + 1); 
 }
 
 
@@ -103,12 +83,7 @@ void quick_sort(int *a,int c, int n, int cx)
 {
 	int k;
     if (c < n) {
-        if(cx == 0) {
-            k = median(a, c, n);
-        } else {
-            k = partition(a, c, n);
-        }
-        
+        k = partition(a, c, n, cx);
         quick_sort(a, c, k-1, cx);
         quick_sort(a, k+1, n, cx);
     }

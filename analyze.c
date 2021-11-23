@@ -182,10 +182,6 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
                 break;
             }
             clock_gettime(CLOCK_MONOTONIC, &stop);
-           /*  for (size_t i = 0; i < size; i++)
-            {
-               printf("%d\n", ptr[i]);
-            } */
             
             
             time_taken += BILLION * (stop.tv_sec - start.tv_sec) + stop.tv_nsec - start.tv_nsec;    // Calculates time taken, difference between start and stop.
