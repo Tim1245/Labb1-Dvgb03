@@ -5,6 +5,7 @@
 // Private
 //
 
+// Swap function for Quick Sort and Bubble Sort
 void swap(int *ptr1, int *ptr2)
 {
     int temp = *ptr1;
@@ -45,7 +46,7 @@ int partition_pivot_median(int* a, int low, int high) {
 	return partition_pivot_last(a, low, high);
 }
 
-int partition(int* a, int c, int b) {
+int partition_pivot_first(int* a, int c, int b) {
     int pivot, lower, upper;
     pivot = a[c];
     lower = c + 1;
@@ -89,7 +90,7 @@ void bubble_sort(int *a, int n)
 void insertion_sort(int *a, int n)
 {
 	int i, key, j;
-    for (i = 1; i < n; i++) {
+    for (i = 0; i < n; i++) {
         key = a[i];
         j = i - 1;
  
@@ -108,7 +109,7 @@ void quick_sort(int *a,int c, int n, int cx)
         if(cx == 0) {
             k = partition_pivot_median(a, c, n);
         } else {
-            k = partition_pivot_last(a, c, n);
+            k = partition_pivot_first(a, c, n);
         }
         
         quick_sort(a, c, k-1, cx);

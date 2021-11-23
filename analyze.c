@@ -12,6 +12,7 @@
 // Private
 //
 
+// Fills array from pointer with length of arraySize and structure of dir
 int* arrayInitializer(int* arr, int arraySize ,const direction_t dir) {
 
     switch (dir) {
@@ -37,7 +38,7 @@ int* arrayInitializer(int* arr, int arraySize ,const direction_t dir) {
     return arr;
 }
 
-
+// Creates and returns a struct with the correct complexity and structure for initialization of array
 comp_dir_t complexity(const algorithm_t a, const case_t c) {
     comp_dir_t comp_dir;
     switch (a) {
@@ -98,8 +99,8 @@ comp_dir_t complexity(const algorithm_t a, const case_t c) {
     }
 }
 
+// Sets buf values actual, better and worse. For printing.
 void set_buffer(result_t *buf, const comp_dir_t comp_dir, int i, int size, double* time_taken) {
-
     buf[i].size = size;
     *time_taken = (*time_taken/BILLION)/ITERATIONS;
     buf[i].time = *time_taken;
@@ -165,22 +166,24 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, (c == best_t ? size/2 : 0), size-1, (c == best_t ? 0 : 1));
+                quick_sort(ptr, (c == best_t ? size/2 : 0), size, (c == best_t ? 0 : 1));        // if c == best_t then   pivot = size/2 and cx = 0    else   pivot = 0 and cx = 1
             break;
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size + 1 : size/2)));
+                linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size : size/2)));   // if c == best_t then   search query = 1     
+                                                                                                    // if c == worst_t then  search query = size + 1    else   search query = size/2
             break;
             case binary_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                binary_search(ptr,size,(c == best_t ? size/2 : (c == worst_t ? size + 1 : 1)));
+                binary_search(ptr,size,(c == best_t ? size/2 : (c == worst_t ? size : 1)));     // if c == best_t then   search query = size/2
+                                                                                                    // if c == worst_t then  search query = size + 1    else   search query = 1
             break;
             default:
                 break;
             }
             clock_gettime(CLOCK_MONOTONIC, &stop);
             
-            time_taken += BILLION * (stop.tv_sec - start.tv_sec) + stop.tv_nsec - start.tv_nsec;
+            time_taken += BILLION * (stop.tv_sec - start.tv_sec) + stop.tv_nsec - start.tv_nsec;    // Calculates time taken, difference between start and stop.
         }
         
         set_buffer(buf, comp_dir, i, size, &time_taken);
