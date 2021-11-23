@@ -13,23 +13,21 @@ void swap(int *ptr1, int *ptr2)
     *ptr2 = temp;
 }
 
-// Setup to use partition with low or middle element
-int partition(int* a, int low, int high, int cx) {
+// Partition function for Quick Sort,   if middlePivot == 1   then use middle pivot     else use lower element as pivot
+int partition(int* a, int low, int high, int middlePivot) {
 
     int pivot;
 
-    if(cx == 0) {
-            pivot = a[low + (high - low)/2];
+    if(middlePivot == 1) {
+        pivot = a[low + (high - low)/2];
     } else {
-            pivot = a[low];
+        pivot = a[low];
     }
 
     int i = (low - 1);
   
-    for (int j = low; j <= high - 1; j++) 
-    { 
-        if (a[j] < pivot) 
-        { 
+    for (int j = low; j <= high - 1; j++)  { 
+        if (a[j] < pivot)  { 
             i++;
             swap(&a[i], &a[j]); 
         } 
@@ -37,8 +35,6 @@ int partition(int* a, int low, int high, int cx) {
     swap(&a[i + 1], &a[high]); 
     return (i + 1); 
 }
-
-
 
 //
 // Public
@@ -99,18 +95,17 @@ bool linear_search(const int *a, int n, int v)
 
 bool binary_search(const int *a, int n, int v)
 {
-	int r = n-1;
-    int l = 0;
+	int high = n-1;
+    int low = 0;
 
-    while (l <= r)
-    {
-    int m = l + (r-l)/2;
-    if (a[m] == v) 
-        return m;  
-    if (a[m] < v) 
-        l = m + 1; 
-    else 
-         r = m - 1; 
+    while (low <= high) {
+        int mid = low + (high-low)/2;
+        if (a[mid] == v) 
+            return mid;  
+        if (a[mid] < v) 
+            low = mid + 1; 
+        else 
+            high = mid - 1; 
     }
     return -1; 
  }

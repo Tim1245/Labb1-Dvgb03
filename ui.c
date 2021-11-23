@@ -72,6 +72,7 @@ static void ui_menu()
 	ui_line('-', MENU_WIDTH);
 }
 
+// Get String from enum, Algorithm
 static const char * const algorithm_str[] = {
 	[bubble_sort_t] = "Bubble Sort",
 	[insertion_sort_t] = "Insertion Sort",
@@ -80,12 +81,14 @@ static const char * const algorithm_str[] = {
 	[binary_search_t] = "Binary Search"
 };
 
-static const char * const best_str[] = {
+// Get String from enum, Case
+static const char * const case_str[] = {
 	[best_t] = "Best",
 	[worst_t] = "Worst",
 	[average_t] = "Average"
 };
 
+// Get String from enum, Complexity
 static const char * const complexity_str[] = {
 	[on] = "n",
 	[on2] = "n^2",
@@ -98,8 +101,10 @@ static const char * const complexity_str[] = {
 static void ui_print_table(const algorithm_t a, const case_t c, result_t *buf)
 {	
 	ui_line('*', PRINT_WIDTH);
-	printf("\t\t\t%s: %s\n", algorithm_str[a], best_str[c]);
+	printf("\t\t\t%s: %s\n", algorithm_str[a], case_str[c]);
 	ui_line('~', PRINT_WIDTH);
+
+	// If the actual complexity is the worst one in our   complexity_t  then print actual as worst one as well,  if not   then print worse
 	printf("Size\tT (s)\t\tT/%s\t\tT/%s\t\tT/%s\n", (buf[0].comp_dir.cx > 0 ? complexity_str[buf[0].comp_dir.cx-1] : complexity_str[buf[0].comp_dir.cx]), complexity_str[buf[0].comp_dir.cx], complexity_str[buf[0].comp_dir.cx+1]);
 	ui_line('~', PRINT_WIDTH);
 	for(int i = 0;i < RESULT_ROWS; i++) {

@@ -10,7 +10,7 @@ void bubble_sort(int *arr, int n);
 void insertion_sort(int *arr, int n);
 
 // quick_sort sorts an array arr of length n, cx determines if pivot should always be median or last
-void quick_sort(int *arr,int c, int n, int cx);
+void quick_sort(int *arr,int c, int n, int middlePivot);
 
 // linear_search checks whether a value v is in an array arr of length n
 bool linear_search(const int *arr, int n, int v);

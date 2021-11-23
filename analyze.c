@@ -139,6 +139,7 @@ void set_buffer(result_t *buf, const comp_dir_t comp_dir, int i, int size, doubl
 //
 // Public
 //
+
 void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
 {
     int size, i, j;
@@ -166,16 +167,16 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, 0, size, (c == best_t ? 0 : 1));        // if c == best_t then   cx = 0    else   cx = 1
+                quick_sort(ptr, 0, size, (c == best_t ? 0 : 1));    // if c == best_t then   cx = 0    else   cx = 1
             break;
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size : size/2)));   // if c == best_t then   search query = 1     
+                linear_search(ptr, size, (c == best_t ? 1 : (c == worst_t ? size + 1 : size/2)));   // if c == best_t then   search query = 1     
                                                                                                     // if c == worst_t then  search query = size + 1    else   search query = size/2
             break;
             case binary_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                binary_search(ptr,size,(c == best_t ? size/2 : (c == worst_t ? size : 1)));     // if c == best_t then   search query = size/2
+                binary_search(ptr,size,(c == best_t ? size/2 : (c == worst_t ? size + 1 : 1)));     // if c == best_t then   search query = size/2
                                                                                                     // if c == worst_t then  search query = size + 1    else   search query = 1
             break;
             default:
@@ -191,6 +192,6 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
         
     }
 
-    buf[0].comp_dir = comp_dir;
+    buf[0].comp_dir = comp_dir;         // Stores comp_dir in buf so it can be used when printing
 
 }
