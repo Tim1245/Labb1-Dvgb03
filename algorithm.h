@@ -1,3 +1,9 @@
+/*
+Tim Axelsson Säfström & Philip Fastberg
+Laboration 1 - Funktionsanalyser
+DVGB03
+*/
+
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 

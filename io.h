@@ -1,3 +1,9 @@
+/*
+Tim Axelsson Säfström & Philip Fastberg
+Laboration 1 - Funktionsanalyser
+DVGB03
+*/
+
 #ifndef IO_H
 #define IO_H
 

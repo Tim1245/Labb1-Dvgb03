@@ -1,3 +1,9 @@
+/*
+Tim Axelsson Säfström & Philip Fastberg
+Laboration 1 - Funktionsanalyser
+DVGB03
+*/
+
 #ifndef UI_H
 #define UI_H
 

@@ -1,3 +1,9 @@
+/*
+Tim Axelsson Säfström & Philip Fastberg
+Laboration 1 - Funktionsanalyser
+DVGB03
+*/
+
 #include "ui.h"
 #include "io.h"
 #include "analyze.h"
