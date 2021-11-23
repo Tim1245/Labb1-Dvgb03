@@ -166,7 +166,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, (c == best_t ? size/2 : 0), size, (c == best_t ? 0 : 1));        // if c == best_t then   pivot = size/2 and cx = 0    else   pivot = 0 and cx = 1
+                quick_sort(ptr, 0, size, (c == best_t ? 0 : 1));        // if c == best_t then   cx = 0    else   cx = 1
             break;
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
@@ -182,6 +182,11 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
                 break;
             }
             clock_gettime(CLOCK_MONOTONIC, &stop);
+           /*  for (size_t i = 0; i < size; i++)
+            {
+               printf("%d\n", ptr[i]);
+            } */
+            
             
             time_taken += BILLION * (stop.tv_sec - start.tv_sec) + stop.tv_nsec - start.tv_nsec;    // Calculates time taken, difference between start and stop.
         }
