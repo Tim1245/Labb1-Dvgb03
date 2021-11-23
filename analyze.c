@@ -167,7 +167,7 @@ void benchmark(const algorithm_t a, const case_t c, result_t *buf, int n)
             break;
             case quick_sort_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                quick_sort(ptr, 0, size, (c == best_t ? 0 : 1));    // if c == best_t then   cx = 0    else   cx = 1
+                quick_sort(ptr, 0, size, (c == best_t ? 1 : 0));    // if c == best_t then   cx = 0    else   cx = 1
             break;
             case linear_search_t:
                 clock_gettime(CLOCK_MONOTONIC, &start);
